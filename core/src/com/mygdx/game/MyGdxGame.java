@@ -64,15 +64,16 @@ public class MyGdxGame extends ApplicationAdapter
 
         batch.begin();
         sprite.setPosition(rocket.getX(),rocket.getY());
-        sprite.setRotation(rocket.getAngle());
+        sprite.setRotation(rocket.getAngle(Gdx.graphics.getDeltaTime()));
         sprite.draw(batch);
         batch.end();
 
         batch.begin();
-        font.draw(batch, "angle " + String.valueOf((int) rocket.getAngle()), 10, 450);
-        font.draw(batch, "x " + String.valueOf((int) rocket.getX()), 10, 430);
-        font.draw(batch, "y " + String.valueOf((int) rocket.getY()), 10, 410);
-        font.draw(batch, "speed " + String.valueOf((int) rocket.getSpeed()), 10, 390);
+        font.draw(batch, "angle " + String.valueOf((int) rocket.getAngle(Gdx.graphics.getDeltaTime())), 10, 450);
+        font.draw(batch, "angleSpeed " + String.valueOf((int) rocket.getAngleSpeed()), 10, 430);
+        font.draw(batch, "x " + String.valueOf((int) rocket.getX()), 10, 410);
+        font.draw(batch, "y " + String.valueOf((int) rocket.getY()), 10, 390);
+        font.draw(batch, "speed " + String.valueOf((int) rocket.getSpeed()), 10, 370);
         //font.draw(batch, "delta " + String.valueOf(Gdx.graphics.getDeltaTime()), 10, 350);
         batch.end();
     }

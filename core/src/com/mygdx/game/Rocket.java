@@ -14,6 +14,8 @@ public class Rocket
 
     private float angle = 90;
 
+    private float angleSpeed = 0;
+
     public Rocket(RocketProperties properties)
     {
         this.properties = properties;
@@ -37,27 +39,44 @@ public class Rocket
 
     public void rotateClockwise()
     {
-        angle -= 1;
+        angleSpeed--;
 
-        if (angle < 0)
+        if (angleSpeed < -100)
         {
-            angle += 360;
+            angleSpeed = -100;
         }
     }
 
     public void rotateAnticlockwise()
     {
-        this.angle += 1;
+        angleSpeed++;
+
+        if (angleSpeed > 100)
+        {
+            angleSpeed = 100;
+        }
+    }
+
+    public float getAngle(float delta)
+    {
+        angle += delta * angleSpeed;
 
         if (angle > 360)
         {
             angle -= 360;
         }
+
+        if (angle < 0)
+        {
+            angle += 360;
+        }
+
+        return angle;
     }
 
-    public float getAngle()
+    public float getAngleSpeed()
     {
-        return this.angle;
+        return angleSpeed;
     }
 
     public void increaseVelocity()
@@ -83,8 +102,8 @@ public class Rocket
     public void update(float delta)
     {
         Vector2 direction = new Vector2();
-        direction.x = (float) Math.cos(Math.toRadians(this.getAngle()));
-        direction.y = (float) Math.sin(Math.toRadians(this.getAngle()));
+        direction.x = (float) Math.cos(Math.toRadians(this.getAngle(delta)));
+        direction.y = (float) Math.sin(Math.toRadians(this.getAngle(delta)));
 
         this.x += direction.x * delta * this.velocity;
         this.y += direction.y * delta * this.velocity;
