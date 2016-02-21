@@ -119,6 +119,7 @@ public class MyGdxGame extends ApplicationAdapter {
             Rectangle raindrop = iter.next();
             raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
             if(raindrop.y + 64 < 0) iter.remove();
+
             if(raindrop.overlaps(bucket)) {
                 dropSound.play();
                 iter.remove();
