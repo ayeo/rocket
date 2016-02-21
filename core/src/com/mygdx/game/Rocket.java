@@ -1,14 +1,16 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Rocket
 {
-    private int x;
+    private float x;
 
-    private int y;
+    private float y;
 
-    private double velocity;
+    private double velocity = 1;
 
-    private double angle;
+    private float angle = 0;
 
     public Rocket(int x, int y)
     {
@@ -16,48 +18,63 @@ public class Rocket
         this.y = y;
     }
 
-    public int getX()
+    public float getX()
     {
         return this.x;
     }
 
-    public int getY()
+    public float getY()
     {
         return this.y;
     }
 
-    public void moveLeft(float value)
-    {
-        this.x -= value;
-    }
-
-    public void moveRight(float value)
-    {
-        this.x += value;
-    }
-
-    public void moveDown(float value)
-    {
-        this.y -= value;
-    }
-
-    public void moveUp(float value)
-    {
-        this.y += value;
-    }
-
     public void rotateClockwise()
     {
-        this.angle -= 1;
+        this.angle -= 2;
     }
 
     public void rotateAnticlockwise()
     {
-        this.angle += 1;
+        this.angle += 2;
     }
 
-    public double getAngle()
+    public float getAngle()
     {
         return this.angle;
+    }
+
+    public void increaseVelocity()
+    {
+        this.velocity += 5;
+
+        if (this.velocity > 550)
+        {
+            this.velocity = 550;
+        }
+    }
+
+    public void decreaseVelocity()
+    {
+        this.velocity -= 5;
+
+        if (this.velocity < 0)
+        {
+            this.velocity = 0;
+        }
+    }
+
+    public void update(float delta)
+    {
+        Vector2 direction = new Vector2();
+        direction.x = (float) Math.cos(Math.toRadians(this.getAngle()));
+        direction.y = (float) Math.sin(Math.toRadians(this.getAngle()));
+
+        this.x += direction.x * delta * this.velocity;
+        this.y += direction.y * delta * this.velocity;
+    }
+
+    public double getSpeed()
+    {
+        return this.velocity;
     }
 }
