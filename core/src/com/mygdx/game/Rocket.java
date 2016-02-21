@@ -101,12 +101,8 @@ public class Rocket
 
     public void update(float delta)
     {
-        Vector2 direction = new Vector2();
-        direction.x = (float) Math.cos(Math.toRadians(this.getAngle(delta)));
-        direction.y = (float) Math.sin(Math.toRadians(this.getAngle(delta)));
-
-        this.x += direction.x * delta * this.velocity;
-        this.y += direction.y * delta * this.velocity;
+        this.x += Math.cos(Math.toRadians(this.getAngle(delta))) * delta * this.velocity;
+        this.y += Math.sin(Math.toRadians(this.getAngle(delta))) * delta * this.velocity;
     }
 
     public float getSpeed()
