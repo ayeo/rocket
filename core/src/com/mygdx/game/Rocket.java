@@ -4,15 +4,22 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Rocket
 {
-    private float x;
+    private RocketProperties properties;
 
-    private float y;
+    private float x = 0;
 
-    private double velocity = 1;
+    private float y = 0;
 
-    private float angle = 0;
+    private float velocity = 0;
 
-    public Rocket(int x, int y)
+    private float angle = 90;
+
+    public Rocket(RocketProperties properties)
+    {
+        this.properties = properties;
+    }
+
+    public void setPosition(int x, int y)
     {
         this.x = x;
         this.y = y;
@@ -30,12 +37,22 @@ public class Rocket
 
     public void rotateClockwise()
     {
-        this.angle -= 2;
+        angle -= 1;
+
+        if (angle < 0)
+        {
+            angle += 360;
+        }
     }
 
     public void rotateAnticlockwise()
     {
-        this.angle += 2;
+        this.angle += 1;
+
+        if (angle > 360)
+        {
+            angle -= 360;
+        }
     }
 
     public float getAngle()
@@ -45,17 +62,17 @@ public class Rocket
 
     public void increaseVelocity()
     {
-        this.velocity += 5;
+        this.velocity += 1;
 
-        if (this.velocity > 550)
+        if (this.velocity > properties.getVMax())
         {
-            this.velocity = 550;
+            this.velocity = properties.getVMax();
         }
     }
 
     public void decreaseVelocity()
     {
-        this.velocity -= 5;
+        this.velocity -= 1;
 
         if (this.velocity < 0)
         {
@@ -73,7 +90,7 @@ public class Rocket
         this.y += direction.y * delta * this.velocity;
     }
 
-    public double getSpeed()
+    public float getSpeed()
     {
         return this.velocity;
     }

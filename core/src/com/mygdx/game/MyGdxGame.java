@@ -36,7 +36,9 @@ public class MyGdxGame extends ApplicationAdapter
         sprite.setSize(40, 22);
         sprite.setOrigin(20, 11);
 
-        rocket = new Rocket(400, 100);
+
+        rocket = new Rocket(new RocketProperties(200));
+        rocket.setPosition(400, 100);
 
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -64,17 +66,14 @@ public class MyGdxGame extends ApplicationAdapter
         sprite.setPosition(rocket.getX(),rocket.getY());
         sprite.setRotation(rocket.getAngle());
         sprite.draw(batch);
+        batch.end();
 
-        font.draw(batch, String.valueOf(rocket.getAngle()), 10, 450);
-        font.draw(batch, "x " + String.valueOf(rocket.getX()), 10, 410);
-        font.draw(batch, "y " + String.valueOf(rocket.getY()), 10, 390);
-        font.draw(batch, "speed " + String.valueOf(rocket.getSpeed()), 10, 370);
-        font.draw(batch, "delta " + String.valueOf(Gdx.graphics.getDeltaTime()), 10, 350);
-        font.draw(batch, "cosinus " + String.valueOf(Math.cos(Math.toRadians(rocket.getAngle()))), 10, 330);
-        font.draw(batch, "sinus " + String.valueOf(Math.sin(Math.toRadians(rocket.getAngle()))), 10, 310);
-
-
-
+        batch.begin();
+        font.draw(batch, "angle " + String.valueOf((int) rocket.getAngle()), 10, 450);
+        font.draw(batch, "x " + String.valueOf((int) rocket.getX()), 10, 430);
+        font.draw(batch, "y " + String.valueOf((int) rocket.getY()), 10, 410);
+        font.draw(batch, "speed " + String.valueOf((int) rocket.getSpeed()), 10, 390);
+        //font.draw(batch, "delta " + String.valueOf(Gdx.graphics.getDeltaTime()), 10, 350);
         batch.end();
     }
 
