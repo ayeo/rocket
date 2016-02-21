@@ -45,4 +45,19 @@ public class Rocket
     {
         this.y += value;
     }
+
+    public void rotateClockwise()
+    {
+        this.angle -= 1;
+    }
+
+    public void rotateAnticlockwise()
+    {
+        this.angle += 1;
+    }
+
+    public double getAngle()
+    {
+        return this.angle;
+    }
 }
